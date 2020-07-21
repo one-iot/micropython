@@ -4,6 +4,8 @@ name: Release
 
 # Triggers the workflow on push events but only for the master branch
 on:
+  pull_request:
+    
   push:
     branches: [ master ]
 
@@ -11,6 +13,8 @@ on:
 jobs:
   # Define the build job
   build:
+    env:
+      ESPIDF: /home/runner/src/espressif/esp-idf
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +22,6 @@ jobs:
 
     - name: Collect Espressif IDF
       run: |
-        export ESPIDF=$HOME/src/espressif/esp-idf
         mkdir -p $ESPIDF
         cd $ESPIDF
         git clone https://github.com/espressif/esp-idf.git $ESPIDF
@@ -31,10 +34,9 @@ jobs:
         requirements: /home/runner/src/espressif/esp-idf/requirements.txt
 
     - name: Install Espressif IDF
-      working-directory: $ESPIDF
       run: |
-        ls -l
         cd $ESPIDF
+        ls -l
         ./install.sh
         cd micropython/ports/esp32
         source $ESPIDF/export.sh
