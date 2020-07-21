@@ -33,3 +33,8 @@ jobs:
         git clone https://github.com/espressif/esp-idf.git $ESPIDF
         git checkout 9e70825d1e1cbf7988cf36981774300066580ea7
         git submodule update --init --recursive
+        
+    - name: Install Python Dependancies
+      uses: BSFishy/pip-action@v1
+      with:
+        requirements: $ESPIDF/requirements.txt
