@@ -30,6 +30,7 @@ jobs:
         
     - name: Set up Python
       run: |
+        apt-get install python3-venv
         cd $GITHUB_WORKSPACE/ports/esp32
         python3 -m venv build-venv
         source build-venv/bin/activate
