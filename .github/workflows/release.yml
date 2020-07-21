@@ -38,5 +38,42 @@ jobs:
         cd $ESPIDF
         ls -l
         ./install.sh
-        cd micropython/ports/esp32
+        
+    - name: Build Micropython
+      run: |
+        cd $GITHUB_WORKSPACE/micropython/ports/esp32
         source $ESPIDF/export.sh
+        printf "ESPIDF ?= $ESPIDF\nBOARD ?= GENERIC\n\ninclude Makefile" > makefile
+
+        cd $GITHUB_WORKSPACE/mpy-cross
+        make mpy-cross
+        
+        cd $GITHUB_WORKSPACE/ports/esp32
+        make submodules
+        make
+        
+        ls -l $GITHUB_WORKSPACE/build
+        
+    - name: Return Bootloader
+      uses: actions/upload-artifact@v2
+      with:
+        # Artifact name
+        name: bootloader.bin
+        # A file, directory or wildcard pattern that describes what to upload
+        path: $GITHUB_WORKSPACE/build/bootloader.bin
+        
+    - name: Return Partitions
+      uses: actions/upload-artifact@v2
+      with:
+        # Artifact name
+        name: partitions.bin
+        # A file, directory or wildcard pattern that describes what to upload
+        path: $GITHUB_WORKSPACE/build/partitions.bin
+        
+    - name: Return Application
+      uses: actions/upload-artifact@v2
+      with:
+        # Artifact name
+        name: application.bin
+        # A file, directory or wildcard pattern that describes what to upload
+        path: $GITHUB_WORKSPACE/build/application.bin
