@@ -31,7 +31,9 @@ jobs:
         requirements: /home/runner/src/espressif/esp-idf/requirements.txt
 
     - name: Install Espressif IDF
+      working-directory: $ESPIDF
       run: |
+        ls -l
         cd $ESPIDF
         ./install.sh
         cd micropython/ports/esp32
