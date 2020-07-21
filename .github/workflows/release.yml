@@ -41,7 +41,7 @@ jobs:
         
     - name: Build Micropython
       run: |
-        cd $GITHUB_WORKSPACE/micropython/ports/esp32
+        cd $GITHUB_WORKSPACE/ports/esp32
         source $ESPIDF/export.sh
         printf "ESPIDF ?= $ESPIDF\nBOARD ?= GENERIC\n\ninclude Makefile" > makefile
 
