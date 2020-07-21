@@ -37,4 +37,4 @@ jobs:
     - name: Install Python Dependancies
       uses: BSFishy/pip-action@v1
       with:
-        requirements: ~/src/espressif/esp-idf/requirements.txt
+        requirements: /home/runner/src/espressif/esp-idf/requirements.txt
