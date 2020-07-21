@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2   # Check out to $GITHUB_WORKSPACE
 
-    - name: Collect Espressif IDF
+    - name: Collect Espressif IDF 
       run: |
         mkdir -p $ESPIDF
         cd $ESPIDF
