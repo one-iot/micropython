@@ -16,6 +16,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2   # Check out to $GITHUB_WORKSPACE
 
+    - name: Install Python Dependancies
+      uses: BSFishy/pip-action@v1
+      with:
+        requirements: ~/src/espressif/esp-idf/requirements.txt
+
     - name: Install Xtensa Cross-compiler
       run: |
         export XTENSA=$HOME/src
@@ -34,7 +39,4 @@ jobs:
         git checkout 9e70825d1e1cbf7988cf36981774300066580ea7
         git submodule update --init --recursive
         
-    - name: Install Python Dependancies
-      uses: BSFishy/pip-action@v1
-      with:
-        requirements: $ESPIDF/requirements.txt
+
