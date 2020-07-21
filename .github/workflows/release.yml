@@ -40,7 +40,6 @@ jobs:
     - name: Install Espressif IDF
       run: |
         cd $ESPIDF
-        ls -l
         ./install.sh
         
     - name: Build Micropython
@@ -66,7 +65,7 @@ jobs:
         # Artifact name
         name: bootloader.bin
         # A file, directory or wildcard pattern that describes what to upload
-        path: $GITHUB_WORKSPACE/ports/esp32/build-GENERIC/bootloader.bin
+        path: ./ports/esp32/build-GENERIC/bootloader.bin
         
     - name: Return Partitions
       uses: actions/upload-artifact@v2
@@ -74,7 +73,7 @@ jobs:
         # Artifact name
         name: partitions.bin
         # A file, directory or wildcard pattern that describes what to upload
-        path: $GITHUB_WORKSPACE/ports/esp32/build-GENERIC/partitions.bin
+        path: ./ports/esp32/build-GENERIC/partitions.bin
         
     - name: Return Application
       uses: actions/upload-artifact@v2
@@ -82,4 +81,4 @@ jobs:
         # Artifact name
         name: application.bin
         # A file, directory or wildcard pattern that describes what to upload
-        path: $GITHUB_WORKSPACE/ports/esp32/build-GENERIC/application.bin
+        path: ./ports/esp32/build-GENERIC/application.bin
