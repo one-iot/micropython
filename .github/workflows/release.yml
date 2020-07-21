@@ -18,6 +18,7 @@ jobs:
 
     - name: Collect Espressif IDF
       run: |
+        cd ports/esp32
         make ESPIDF=
         export ESPIDF=$HOME/src/espressif/esp-idf
         mkdir -p $ESPIDF
