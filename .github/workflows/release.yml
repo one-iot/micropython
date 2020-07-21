@@ -14,11 +14,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v2   # Check out to $GITHUB_WORKSPACE
 
-    - name: Install Toolchain
+    - name: Install Xtensa Cross-compiler
       run: |
-        export ESPIDF=$GITHUB_WORKSPACE/src/github.com/espressif/esp-idf
+        export XTENSA=$HOME/src
+        mkdir -p $XTENSA
+        cd $XTENSA
+        wget https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz
+        tar -xzf xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz
+        export PATH="$PATH:$XTENSA/xtensa-esp32-elf/bin"
+
+    - name: Install Espressif IDF
+      run: |
+        export ESPIDF=$HOME/src/espressif/esp-idf
         mkdir -p $ESPIDF
         cd $ESPIDF
         git clone https://github.com/espressif/esp-idf.git $ESPIDF
