@@ -30,7 +30,7 @@ jobs:
         
     - name: Set up Python
       run: |
-        apt-get install python3-venv
+        sudo apt-get install python3-venv
         cd $GITHUB_WORKSPACE/ports/esp32
         python3 -m venv build-venv
         source build-venv/bin/activate
@@ -54,8 +54,8 @@ jobs:
         make mpy-cross
         
         cd $GITHUB_WORKSPACE/ports/esp32
-        make submodules PYTHON=/usr/bin/python
-        make PYTHON=/usr/bin/python
+        make submodules
+        make
         
         ls -l $GITHUB_WORKSPACE/build
         
