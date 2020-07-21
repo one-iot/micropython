@@ -28,10 +28,13 @@ jobs:
         git checkout 4c81978a3e2220674a432a588292a4c860eef27b
         git submodule update --init --recursive
         
-    - name: Install Espressif IDF Python Dependancies
-      uses: BSFishy/pip-action@v1
-      with:
-        requirements: /home/runner/src/espressif/esp-idf/requirements.txt
+    - name: Set up Python
+      run: |
+        cd $GITHUB_WORKSPACE/ports/esp32
+        python3 -m venv build-venv
+        source build-venv/bin/activate
+        pip install --upgrade pip
+        pip install -r $ESPIDF/requirements.txt
 
     - name: Install Espressif IDF
       run: |
@@ -42,6 +45,7 @@ jobs:
     - name: Build Micropython
       run: |
         cd $GITHUB_WORKSPACE/ports/esp32
+        source build-venv/bin/activate
         source $ESPIDF/export.sh
         printf "ESPIDF ?= $ESPIDF\nBOARD ?= GENERIC\n\ninclude Makefile" > makefile
 
