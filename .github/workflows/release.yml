@@ -57,7 +57,8 @@ jobs:
         make submodules
         make
         
-        ls -l $GITHUB_WORKSPACE/build
+        ls -l $GITHUB_WORKSPACE/ports/esp32
+        ls -l $GITHUB_WORKSPACE/ports/esp32/build
         
     - name: Return Bootloader
       uses: actions/upload-artifact@v2
