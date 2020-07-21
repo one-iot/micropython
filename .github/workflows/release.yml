@@ -49,8 +49,8 @@ jobs:
         make mpy-cross
         
         cd $GITHUB_WORKSPACE/ports/esp32
-        make submodules
-        make
+        make submodules PYTHON=/usr/bin/python
+        make PYTHON=/usr/bin/python
         
         ls -l $GITHUB_WORKSPACE/build
         
